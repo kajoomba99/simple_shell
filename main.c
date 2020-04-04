@@ -19,6 +19,7 @@ int main(void)
 	argv[1] = NULL;
 
 	do {
+		signal(SIGINT, &handle_signal);
 		printf("#cisfun$ ");
 		rgetl = getline(&lineptr, &n, stdin);
 		ctok = strtok(lineptr, "\n");
@@ -33,7 +34,7 @@ int main(void)
 			else
 				perror("Error");
 			return (0);
-				}
+		}
 		else
 		{
 			wait(&wstatus);
