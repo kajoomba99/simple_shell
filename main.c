@@ -22,6 +22,13 @@ int main(void)
 		signal(SIGINT, &handle_signal);
 		printf("#cisfun$ ");
 		rgetl = getline(&lineptr, &n, stdin);
+		/*End of file condicion*/
+		if (rgetl == EOF)
+		{
+			eof_func('\n');
+			free(lineptr);
+			exit(1);
+		}
 		ctok = strtok(lineptr, "\n");
 		argv[0] = lineptr;
 		rfork = fork();
@@ -36,9 +43,6 @@ int main(void)
 			return (0);
 		}
 		else
-		{
 			wait(&wstatus);
-		}
-
 	} while (rgetl != -1);
 }
