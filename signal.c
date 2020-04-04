@@ -8,4 +8,5 @@
 void handle_signal(int sig)
 {
 	write(1, "\n#cisfun$ ", 12);
+	(void)sig;
 }
