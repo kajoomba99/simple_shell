@@ -10,7 +10,6 @@ int main()
 
 	/*si se recibio parametros asigna av a refav*/
 	/*si no, ejecuta el prompt para que el usuario ingrese los parametros*/
-
 	if (!isatty(0))
 	{
 		nread = getline(&line, &len, stdin);
@@ -19,10 +18,18 @@ int main()
 	}
 	else
 	{
+		signal(SIGINT, &handle_signal);
 		do
 		{
 			printf("#cisfun$ ");
 			nread = getline(&line, &len, stdin);
+			/*End of file, condition*/
+			if (nread == EOF)
+			{
+				eof_func('\n');
+				free(line);
+				exit(0);
+			}
 			rfork = fork();
 			if (rfork == 0)
 			{
