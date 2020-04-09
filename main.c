@@ -1,43 +1,43 @@
 #include "shell.h"
 
-/**
- * main - entry point
- * Return: 0 on succes
- */
-
-int main(void)
+int main()
 {
-	struct stat statbuf;
-	ssize_t rgetl;
-	char *lineptr;
-	size_t n = 0;
-	pid_t rfork;
-	char *ctok;
-	int wstatus, rstat;
-	char *argv[2];
+	ssize_t nread;	/*save the return valueo¿ of getline*/
+	size_t len = 0; /*parametro necesario para funcion getline*/
+	char *line;	/*acá se guarda lo que se ingreso por getline*/
+	pid_t rfork;	/*valor de retorno de fork y de wait*/
+	int status;
 
-	argv[1] = NULL;
+	/*si se recibio parametros asigna av a refav*/
+	/*si no, ejecuta el prompt para que el usuario ingrese los parametros*/
 
-	do {
-		printf("#cisfun$ ");
-		rgetl = getline(&lineptr, &n, stdin);
-		ctok = strtok(lineptr, "\n");
-		argv[0] = lineptr;
-		rfork = fork();
-		if (rfork == 0)
+	if (!isatty(0))
+	{
+		nread = getline(&line, &len, stdin);
+		strtok(line, "\n\t\r");
+		start_func(line);
+	}
+	else
+	{
+		do
 		{
-			rstat = stat(argv[0], &statbuf);
-
-			if (rstat == 0)
-				execve(argv[0], argv, NULL);
+			printf("#cisfun$ ");
+			nread = getline(&line, &len, stdin);
+			rfork = fork();
+			if (rfork == 0)
+			{
+				strtok(line, "\n\t\r");
+				start_func(line);
+			}
 			else
-				perror("Error");
-			return (0);
-				}
-		else
-		{
-			wait(&wstatus);
-		}
+			{
+				wait(&status);
+			}
 
-	} while (rgetl != -1);
+		} while (nread != -1);
+	}
+
+	/*genera un arreglo 2D separando la cadena cibida en espacios*/
+
+	return (0);
 }
