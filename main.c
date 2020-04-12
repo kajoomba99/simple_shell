@@ -12,7 +12,7 @@ int main()
 	{
 		nread = getline(&line, &len, stdin);
 		strtok(line, "\n\t\r");
-		start_func(line);
+		start_func("echo hola como estas");
 	}
 	else
 	{
@@ -33,7 +33,7 @@ int main()
 
 			if (_strcmp(line, "env\n") == 0)
 				env();
-				
+
 			rfork = fork();
 			if (rfork == 0)
 			{

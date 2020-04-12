@@ -76,6 +76,8 @@ char **get_params(char **args)
 		i++;
 	}
 
+	params[wc] = NULL;
+
 	return (params);
 }
 
