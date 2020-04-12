@@ -16,24 +16,24 @@ int main()
 	}
 	else
 	{
+		signal(SIGINT, &handle_signal);
 		do
 		{
 			write(STDOUT_FILENO, "$ ", 2);
 			nread = getline(&line, &len, stdin);
-
+			/*End of file, condition*/
 			if (nread == EOF)
 			{
-				write(STDOUT_FILENO, "\n", 1);
+				eof_func('\n');
 				free(line);
 				exit(0);
 			}
-
-			if(_strcmp(line, "exit\n") == 0)
+			if (_strcmp(line, "exit\n") == 0)
 				exit(0);
 
 			if (_strcmp(line, "env\n") == 0)
 				env();
-
+				
 			rfork = fork();
 			if (rfork == 0)
 			{
