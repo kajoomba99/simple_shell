@@ -4,7 +4,7 @@ char **sep_by_space(char *str)
 {
 	int len = 0;
 	char **av;
-	char *dupstr = strdup(str);
+	char *dupstr = _strdup(str);
 	char *token = strtok(dupstr, " ");
 
 	while (token != NULL)
@@ -13,6 +13,7 @@ char **sep_by_space(char *str)
 	av = malloc(sizeof(char *) * len);
 
 	put_args(av, str);
+
 
 	return (av);
 }
@@ -30,7 +31,7 @@ int count_args(char **arr)
 char **put_args(char **av, char *str)
 {
 	int i = 0;
-	char *dupstr = strdup(str);
+	char *dupstr = _strdup(str);
 	char *token = strtok(dupstr, " ");
 
 	while (token != NULL)
@@ -42,6 +43,7 @@ char **put_args(char **av, char *str)
 	}
 
 	av[i] = NULL;
+
 
 	return (av);
 }

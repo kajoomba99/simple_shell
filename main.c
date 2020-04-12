@@ -2,14 +2,11 @@
 
 int main()
 {
-	ssize_t nread;	/*save the return valueo¿ of getline*/
-	size_t len = 0; /*parametro necesario para funcion getline*/
-	char *line;	/*acá se guarda lo que se ingreso por getline*/
-	pid_t rfork;	/*valor de retorno de fork y de wait*/
-	int status;
-
-	/*si se recibio parametros asigna av a refav*/
-	/*si no, ejecuta el prompt para que el usuario ingrese los parametros*/
+	ssize_t nread = 0;
+	size_t len = 0;
+	char *line = NULL;
+	pid_t rfork;
+	int status = 0;
 
 	if (!isatty(0))
 	{
@@ -21,8 +18,22 @@ int main()
 	{
 		do
 		{
-			printf("#cisfun$ ");
+			write(STDOUT_FILENO, "$ ", 2);
 			nread = getline(&line, &len, stdin);
+
+			if (nread == EOF)
+			{
+				write(STDOUT_FILENO, "\n", 1);
+				free(line);
+				exit(0);
+			}
+
+			if(_strcmp(line, "exit\n") == 0)
+				exit(0);
+
+			if (_strcmp(line, "env\n") == 0)
+				env();
+
 			rfork = fork();
 			if (rfork == 0)
 			{
@@ -36,8 +47,5 @@ int main()
 
 		} while (nread != -1);
 	}
-
-	/*genera un arreglo 2D separando la cadena cibida en espacios*/
-
 	return (0);
 }

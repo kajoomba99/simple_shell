@@ -51,8 +51,8 @@ char *_which(directs **head, char *dir)
 	{
 		while (dup != NULL)
 		{
-			ruta = strcat(dup->direct, "/");
-			ruta = strcat(dup->direct, dir);
+			ruta = _strcat(dup->direct, "/");
+			ruta = _strcat(ruta, dir);
 			if (stat(ruta, &st) == 0)
 			{
 				return (ruta);
@@ -67,14 +67,14 @@ char *_which(directs **head, char *dir)
 char *_getenv(const char *name)
 {
 	extern char **environ;
-	char *dup = strdup(name);
+	char *dup = _strdup(name);
 	char *dupenv;
 	char *value;
 	char *token;
 
 	for (size_t i = 0; environ[i] != NULL; i++)
 	{
-		dupenv = strdup(environ[i]);
+		dupenv = _strdup(environ[i]);
 		token = strtok(dupenv, "=");
 		if (strcmp(dup, dupenv) == 0)
 		{
@@ -84,5 +84,31 @@ char *_getenv(const char *name)
 		}
 	}
 
+
 	return (value);
+}
+
+char *_strdup(const char *str)
+{
+	int i = 0, j = 0;
+	char *p;
+
+	if (str == NULL)
+		return (NULL);
+
+	while (str[i])
+		i++;
+
+	p = malloc(sizeof(char) * (i + 1));
+
+	if (p == NULL)
+		return (NULL);
+
+	while (j < i)
+	{
+		p[j] = str[j];
+		j++;
+	}
+	p[j] = '\0';
+	return (p);
 }

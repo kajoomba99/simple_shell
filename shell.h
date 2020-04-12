@@ -34,5 +34,8 @@ int count_args(char **arr);
 char **sep_by_space(char *str);
 char **get_params(char **args);
 int start_func(char *line);
+char *_strdup(const char *str);
+int _strcmp(char *s1, char *s2);
+int env();
 
 #endif

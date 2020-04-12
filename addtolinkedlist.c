@@ -3,14 +3,14 @@
 struct directories *add_node_end(struct directories **head, const char *str)
 {
 	int len = 0;
-
 	struct directories *new = malloc(sizeof(struct directories));
 	struct directories *last = *head;
 
 	if (!new)
 		return (NULL);
 
-	new->direct = strdup(str);
+	new->direct = _strdup(str);
+	new->next = NULL;
 
 	while (str[len] != '\0')
 		len++;
