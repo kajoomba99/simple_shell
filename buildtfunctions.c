@@ -7,7 +7,7 @@
  */
 char *_strcat(char *fstr, char *sstr)
 {
-	char *concat;
+	char *concat = NULL;
 	int lens1 = 0, lens2 = 0, i = 0, j = 0;
 
 	while (fstr[i] != '\0')
@@ -59,7 +59,10 @@ char *_which(directs **head, char *dir)
 {
 	struct stat st;
 	directs *dup = *head;
-	char *ruta;
+	char *ruta = NULL;
+
+	if (!dir)
+		return (NULL);
 
 	if (stat(dir, &st) == 0)
 	{
