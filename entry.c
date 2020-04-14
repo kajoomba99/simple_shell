@@ -20,7 +20,7 @@ int start_func(char *line)
 
 	if (!reswhich)
 		exit(0);
-
+	
 	if (count_args(refav) > 1 && flags(refav))
 	{
 		params = get_params(refav);

@@ -47,6 +47,6 @@ char **flags(char **args);
 void exect_prompt(void);
 int _strlen(char *str);
 int env(void);
-size_t _getline(char **lineptr)
+size_t _getline(char **lineptr);
 
 #endif

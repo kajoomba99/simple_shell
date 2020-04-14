@@ -13,7 +13,7 @@ int main(void)
 
 	if (!isatty(0))
 	{
-		nread = _getline(&line);
+		nread = getline(&line, &len, stdin);
 		strtok(line, "\n\t\r");
 		start_func(line);
 	}
@@ -39,7 +39,7 @@ void exect_prompt(void)
 	size_t len = 0;
 
 	write(STDOUT_FILENO, "$ ", 2);
-	nread = _getline(&line);
+	nread = getline(&line, &len, stdin);
 	/*End of file, condition*/
 	if (nread == EOF)
 	{
