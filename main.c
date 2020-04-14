@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * main - entry point
+ * Return: 0 on success
+ */
+
 int main()
 {
 	ssize_t nread = 0;
@@ -12,7 +17,7 @@ int main()
 	{
 		nread = getline(&line, &len, stdin);
 		strtok(line, "\n\t\r");
-		start_func("echo hola como estas");
+		start_func(line);
 	}
 	else
 	{
@@ -24,7 +29,7 @@ int main()
 			/*End of file, condition*/
 			if (nread == EOF)
 			{
-				eof_func('\n');
+				write(1, "\n", 1);
 				free(line);
 				exit(0);
 			}

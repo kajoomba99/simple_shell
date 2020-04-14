@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ * flags - function to get the elements that start with "-"
+ * @args: array of elements
+ * Return: array with the elements that start with "-"
+ */
 char **flags(char **args)
 {
 

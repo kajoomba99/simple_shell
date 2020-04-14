@@ -1,5 +1,10 @@
 #include "shell.h"
-
+/**
+ * _strcat - function that concat two string
+ * @fstr: first string
+ * @sstr: second string
+ * Return: char that contains the two string concatenated.
+ */
 char *_strcat(char *fstr, char *sstr)
 {
 	char *concat;
@@ -28,6 +33,11 @@ char *_strcat(char *fstr, char *sstr)
 	return (concat);
 }
 
+/**
+ * _strlen - function that count how many elements are in a string
+ * @str: String the it will count the elements
+ * Return: the number of characters of a string
+ */
 int _strlen(char *str)
 {
 	int i = 0;
@@ -38,11 +48,19 @@ int _strlen(char *str)
 	return (i);
 }
 
+/**
+ * _which - function to get the Path of a binary file
+ * @head: pointer to the first element of a linked list that contains the
+ * the directions where can be allocated the binary file
+ * @dir: name of a binary file that we will search
+ * Return: the path where the binary file is located
+ */
 char *_which(directs **head, char *dir)
 {
 	struct stat st;
 	directs *dup = *head;
 	char *ruta;
+
 	if (stat(dir, &st) == 0)
 	{
 		return (dir);
@@ -57,6 +75,7 @@ char *_which(directs **head, char *dir)
 			{
 				return (ruta);
 			}
+
 			dup = dup->next;
 		}
 	}
@@ -64,9 +83,13 @@ char *_which(directs **head, char *dir)
 	return (NULL);
 }
 
+/**
+ * _getenv - function to get the value of an environment variable
+ * @name: name of the environment variable
+ * Return: the value of the environment variable
+ */
 char *_getenv(const char *name)
 {
-	extern char **environ;
 	char *dup = _strdup(name);
 	char *dupenv;
 	char *value;
@@ -84,10 +107,14 @@ char *_getenv(const char *name)
 		}
 	}
 
-
 	return (value);
 }
 
+/**
+ * _strdup - function to duplicate a string
+ * @str: string to be duplicated
+ * Return: duplicate of the string
+ */
 char *_strdup(const char *str)
 {
 	int i = 0, j = 0;

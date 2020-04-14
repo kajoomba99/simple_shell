@@ -1,14 +1,16 @@
-
 #include "shell.h"
-
+/**
+ * start_func - Receive the input and start the process to execute the command.
+ * @line: is the input received from the stdin.
+ * Return: 0 on success.
+ */
 int start_func(char *line)
 {
-
-	char **dbl, **tags, **params, **refav;
-	char *reswhich;
+	char **dbl = NULL, **tags = NULL, **params = NULL, **refav = NULL;
+	char *reswhich = NULL;
 	directs *head = NULL;
 	char *directories = _getenv("PATH");
-	int cpar = 2, i = 0, j = 0;
+	int cpar = 2;
 
 	add_dir_to_struct(&head, directories);
 
@@ -26,33 +28,36 @@ int start_func(char *line)
 
 	dbl[0] = malloc(_strlen(reswhich));
 	dbl[0] = reswhich;
+	dbl[1] = NULL;
 
 	if (count_args(refav) > 1 && flags(refav))
 	{
-		i = 1;
-		j = 0;
-		while (tags[j] != NULL)
-		{
-			dbl[i] = malloc(_strlen(tags[j]));
-			dbl[i] = tags[j];
-			i++, j++;
-		}
-
-		j = 0;
-
-		while (params[j] != NULL)
-		{
-			dbl[i] = malloc(_strlen(params[j]));
-			dbl[i] = params[j];
-			i++, j++;
-		}
-		dbl[i] = NULL;
+		put_stuff_in_dbl(dbl, tags);
+		put_stuff_in_dbl(dbl, params);
 	}
-	else
-	{
-		dbl[1] = NULL;
-	}
-	execve(dbl[0], dbl, NULL);
+
+	execve(dbl[0], dbl, environ);
 
 	return (0);
+}
+
+/**
+ * put_stuff_in_dbl - This function is used to concat elements from a 2D array
+ * to another.
+ * @dbl: Array tha receivesthe elements from @stuff
+ * @stuff: Array 2D
+ */
+void put_stuff_in_dbl(char **dbl, char **stuff)
+{
+	int iarg = count_args(dbl);
+	int i = 0;
+
+	while (stuff[i] != NULL)
+	{
+		dbl[iarg] = malloc(_strlen(stuff[i]));
+		dbl[iarg] = stuff[i];
+		iarg++, i++;
+	}
+
+	dbl[iarg] = NULL;
 }

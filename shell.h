@@ -11,31 +11,40 @@
 #include <signal.h>
 #include <stdlib.h>
 
+extern char **environ;
+
 /*Signal fucntion*/
 void handle_signal(int sig);
 /*EOF function*/
 void eof_func(char c);
 
+
+/**
+ * struct directories - struct directories
+ * @direct: direct
+ * @next: next
+ */
 typedef struct directories
 {
 	char *direct;
 	struct directories *next;
 } directs;
 
-char *_which(directs **head, char *dir);
-char *_getenv(const char *name);
-void add_dir_to_struct(struct directories **head, char *directories);
 struct directories *add_node_end(struct directories **head, const char *str);
+void add_dir_to_struct(struct directories **head, char *directories);
+void put_stuff_in_dbl(char **dbl, char **stuff);
+char *_which(directs **head, char *dir);
 char **put_args(char **av, char *str);
 char *_strcat(char *fstr, char *sstr);
-char **flags(char **args);
-int _strlen(char *str);
-int count_args(char **arr);
+char *_getenv(const char *name);
+int _strcmp(char *s1, char *s2);
 char **sep_by_space(char *str);
 char **get_params(char **args);
-int start_func(char *line);
 char *_strdup(const char *str);
-int _strcmp(char *s1, char *s2);
-int env();
+int count_args(char **arr);
+int start_func(char *line);
+char **flags(char **args);
+int _strlen(char *str);
+int env(void);
 
 #endif

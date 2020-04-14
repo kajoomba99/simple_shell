@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * add_node_end - Add an element to the end of a linked list
+ * @head: pointer to the first element of the linked list
+ * @str: Element that will be added to the end of the linked list
+ * Return: linked list with the element added at the end
+ */
+
 struct directories *add_node_end(struct directories **head, const char *str)
 {
 	int len = 0;
