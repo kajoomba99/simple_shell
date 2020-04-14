@@ -7,6 +7,7 @@
 
 void handle_signal(int sig)
 {
-	write(1, "\n#cisfun$ ", 12);
+	write(1, "\n", 1);
 	(void)sig;
+	exit(0);
 }
