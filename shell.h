@@ -44,7 +44,7 @@ char *_strdup(const char *str);
 int count_args(char **arr);
 int start_func(char *line);
 char **flags(char **args);
+void exect_prompt(void);
 int _strlen(char *str);
 int env(void);
-
 #endif
