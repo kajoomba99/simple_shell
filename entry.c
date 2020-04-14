@@ -17,6 +17,10 @@ int start_func(char *line)
 	refav = sep_by_space(line);
 
 	reswhich = _which(&head, refav[0]);
+
+	if (!reswhich)
+		exit(0);
+
 	if (count_args(refav) > 1 && flags(refav))
 	{
 		params = get_params(refav);
