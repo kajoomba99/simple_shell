@@ -42,7 +42,6 @@ char **get_params(char **args);
 char *add_one_to_env(char *ern);
 char *_strdup(const char *str);
 void error_printer(char *file);
-int _getline(char **lineptr);
 int count_args(char **arr);
 int start_func(char *line);
 char **flags(char **args);
