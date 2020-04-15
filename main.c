@@ -52,7 +52,7 @@ void exect_prompt(void)
 		exit(0);
 	}
 	if (_strcmp(line, "exit\n") == 0)
-		exit(0);
+		free(line), exit(0);
 
 	if (_strcmp(line, "env\n") == 0)
 		env();

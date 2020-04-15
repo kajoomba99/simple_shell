@@ -7,7 +7,7 @@
 char **sep_by_space(char *str)
 {
 	int len = 0;
-	char **av;
+	char **av = NULL;
 	char *dupstr = _strdup(str);
 	char *token = strtok(dupstr, " ");
 
