@@ -42,6 +42,9 @@ int _strlen(char *str)
 {
 	int i = 0;
 
+	if (str == NULL)
+		return (0);
+
 	while (str[i] != '\0')
 		i++;
 
@@ -60,9 +63,6 @@ char *_which(directs **head, char *dir)
 	struct stat st;
 	directs *dup = *head;
 	char *ruta = NULL;
-
-	if (!dir)
-		return (NULL);
 
 	if (stat(dir, &st) == 0)
 	{
@@ -83,7 +83,7 @@ char *_which(directs **head, char *dir)
 		}
 	}
 
-	return (NULL);
+	return (dir);
 }
 
 /**
@@ -94,9 +94,9 @@ char *_which(directs **head, char *dir)
 char *_getenv(const char *name)
 {
 	char *dup = _strdup(name);
-	char *dupenv;
-	char *value;
-	char *token;
+	char *dupenv = NULL;
+	char *value = NULL;
+	char *token = NULL;
 
 	for (size_t i = 0; environ[i] != NULL; i++)
 	{

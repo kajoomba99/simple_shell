@@ -18,9 +18,6 @@ int start_func(char *line)
 
 	reswhich = _which(&head, refav[0]);
 
-	if (!reswhich)
-		exit(0);
-	
 	if (count_args(refav) > 1 && flags(refav))
 	{
 		params = get_params(refav);
@@ -41,8 +38,9 @@ int start_func(char *line)
 	}
 
 	execve(dbl[0], dbl, environ);
-
-	return (0);
+	error_printer(dbl[0]);
+	fflush(stdin);
+	_exit(0);
 }
 
 /**

@@ -2,14 +2,18 @@
 
 /**
  * main - entry point
+ * @c: narg
+ * @av: args
  * Return: 0 on success
  */
 
-int main(void)
+int main(int c __attribute__((unused)), char **av __attribute__((unused)))
 {
 	ssize_t nread = 0;
 	char *line = NULL;
 	size_t len = 0;
+
+	setenv("FILE", av[0], 0);
 
 	if (!isatty(0))
 	{
@@ -34,11 +38,10 @@ void exect_prompt(void)
 {
 	pid_t rfork;
 	int status = 0;
-	size_t nread = 0;
-	char *line;
+	ssize_t nread = 0;
+	char *line = NULL;
 	size_t len = 0;
 
-	line = malloc(sizeof(char) * 1024);
 	write(STDOUT_FILENO, "$ ", 2);
 	nread = getline(&line, &len, stdin);
 	/*End of file, condition*/
@@ -62,7 +65,7 @@ void exect_prompt(void)
 	}
 	else
 	{
-		wait(&status);
+		if (!wait(&status))
+			perror("Error wait");
 	}
-	free(line);
 }

@@ -32,3 +32,22 @@ int env(void)
 
 	return (0);
 }
+/**
+ * error_printer - error_printer
+ * @file: file
+ */
+void error_printer(char *file)
+{
+	int len = 0;
+	char *ner = _getenv("NERR");
+	char *fn = _getenv("FILE");
+
+	len = _strlen(fn);
+	write(STDOUT_FILENO, fn, len);
+	write(STDOUT_FILENO, ": ", 2);
+	write(STDOUT_FILENO, ner, 1);
+	write(STDOUT_FILENO, ": ", 2);
+	len = _strlen(file);
+	write(STDOUT_FILENO, file, len);
+	write(STDOUT_FILENO, ": not found\n", 12);
+}

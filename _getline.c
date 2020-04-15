@@ -5,10 +5,10 @@
  * @lineptr: Storing the address of the buffer containing the text into.
  * Return: Number of characters.
  */
-size_t _getline(char **lineptr)
+int _getline(char **lineptr)
 {
 	int size = 1024;
-	size_t input_l = 0;
+	int input_l = 0;
 	char *b = *lineptr;
 
 	if (*lineptr == NULL)

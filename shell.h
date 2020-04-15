@@ -10,14 +10,13 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <errno.h>
 
 extern char **environ;
-
 /*Signal fucntion*/
 void handle_signal(int sig);
 /*EOF function*/
 void eof_func(char c);
-
 
 /**
  * struct directories - struct directories
@@ -40,13 +39,15 @@ char *_getenv(const char *name);
 int _strcmp(char *s1, char *s2);
 char **sep_by_space(char *str);
 char **get_params(char **args);
+char *add_one_to_env(char *ern);
 char *_strdup(const char *str);
+void error_printer(char *file);
+int _getline(char **lineptr);
 int count_args(char **arr);
 int start_func(char *line);
 char **flags(char **args);
 void exect_prompt(void);
 int _strlen(char *str);
 int env(void);
-size_t _getline(char **lineptr);
 
 #endif
