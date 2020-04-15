@@ -34,10 +34,11 @@ void exect_prompt(void)
 {
 	pid_t rfork;
 	int status = 0;
-	ssize_t nread = 0;
-	char *line = NULL;
+	size_t nread = 0;
+	char *line;
 	size_t len = 0;
 
+	line = malloc(sizeof(char) * 1024);
 	write(STDOUT_FILENO, "$ ", 2);
 	nread = getline(&line, &len, stdin);
 	/*End of file, condition*/
@@ -63,4 +64,5 @@ void exect_prompt(void)
 	{
 		wait(&status);
 	}
+	free(line);
 }
