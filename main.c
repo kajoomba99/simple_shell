@@ -51,22 +51,29 @@ void exect_prompt(void)
 		free(line);
 		exit(0);
 	}
-	if (_strcmp(line, "exit\n") == 0)
-		free(line), exit(0);
-
-	if (_strcmp(line, "env\n") == 0)
-		env();
-
-	rfork = fork();
-	if (rfork == 0)
+	if (_strcmp(line, "\n") != 0)
 	{
-		strtok(line, "\n\t\r");
-		start_func(line);
+		if (_strcmp(line, "exit\n") == 0)
+			free(line), exit(0);
+
+		if (_strcmp(line, "env\n") == 0)
+			env();
+
+		rfork = fork();
+		if (rfork == 0)
+		{
+			strtok(line, "\n\t\r");
+			start_func(line);
+		}
+		else
+		{
+			if (!wait(&status))
+				perror("Error wait");
+		}
+		free(line);
 	}
 	else
 	{
-		if (!wait(&status))
-			perror("Error wait");
+		free(line);
 	}
-	free(line);
 }

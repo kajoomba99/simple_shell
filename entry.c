@@ -7,7 +7,7 @@
 int start_func(char *line)
 {
 	char **dbl = NULL, **tags = NULL, **params = NULL;
-	char **refav = NULL, **rtgs = NULL;
+	char **refav = NULL;
 	char *reswhich = NULL;
 	directs *head = NULL;
 	char *directories = _getenv("PATH");
@@ -25,13 +25,11 @@ int start_func(char *line)
 		cpar += count_args(params);
 	}
 	dbl = malloc(sizeof(char *) * cpar);
-	dbl[0] = malloc(_strlen(reswhich));
 	dbl[0] = _strdup(reswhich);
 	dbl[1] = NULL;
 	nargs = count_args(refav);
-	rtgs = flags(refav);
 
-	if (nargs > 1 && rtgs)
+	if (nargs > 1 && tags)
 	{
 		put_stuff_in_dbl(dbl, tags);
 		put_stuff_in_dbl(dbl, params);
