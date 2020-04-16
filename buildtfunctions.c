@@ -96,11 +96,11 @@ char *_getenv(const char *name)
 	char *value = NULL;
 	char *token = NULL;
 	int i = 0;
-	
+
 	for (i = 0; environ[i] != NULL; i++)
 	{
 		token = strtok(environ[i], "=");
-		if (strcmp(dup, environ[i]) == 0)
+		if (_strcmp(dup, environ[i]) == 0)
 		{
 			token = strtok(NULL, "=");
 			value = token;
