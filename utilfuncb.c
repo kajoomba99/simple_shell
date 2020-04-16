@@ -22,8 +22,9 @@ int _strcmp(char *s1, char *s2)
 int env(void)
 {
 	int len = 0;
+	int i = 0;
 
-	for (size_t i = 0; environ[i] != NULL; i++)
+	for (i = 0; environ[i] != NULL; i++)
 	{
 		len = strlen(environ[i]);
 		write(STDOUT_FILENO, environ[i], len);
