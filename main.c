@@ -13,8 +13,6 @@ int main(int c __attribute__((unused)), char **av __attribute__((unused)))
 	char *line = NULL;
 	size_t len = 0;
 
-	setenv("FILE", av[0], 0);
-
 	if (!isatty(0))
 	{
 		nread = getline(&line, &len, stdin);
