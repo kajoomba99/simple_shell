@@ -7,7 +7,7 @@
 
 void handle_signal(int sig)
 {
-	write(STDIN_FILENO, "\n$ ", 4);
+	write(STDIN_FILENO, "\n$ ", 3);
 	fflush(stdout);
 	(void)sig;
 }

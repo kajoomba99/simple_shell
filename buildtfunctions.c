@@ -95,8 +95,9 @@ char *_getenv(const char *name)
 	char *dup = _strdup(name);
 	char *value = NULL;
 	char *token = NULL;
-
-	for (size_t i = 0; environ[i] != NULL; i++)
+	int i = 0;
+	
+	for (i = 0; environ[i] != NULL; i++)
 	{
 		token = strtok(environ[i], "=");
 		if (strcmp(dup, environ[i]) == 0)
