@@ -25,12 +25,11 @@ char **flags(char **args)
 		if (*args[i] == '-')
 		{
 			flags[fc] = malloc(sizeof(char) * _strlen(args[i]));
-			flags[fc] = args[i];
+			flags[fc] = _strdup(args[i]);
 			fc++;
 		}
 		i++;
 	}
 	flags[fc] = NULL;
-
 	return (flags);
 }

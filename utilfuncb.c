@@ -39,15 +39,31 @@ int env(void)
 void error_printer(char *file)
 {
 	int len = 0;
-	char *ner = _getenv("NERR");
 	char *fn = _getenv("FILE");
 
 	len = _strlen(fn);
 	write(STDOUT_FILENO, fn, len);
 	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, ner, 1);
 	write(STDOUT_FILENO, ": ", 2);
 	len = _strlen(file);
 	write(STDOUT_FILENO, file, len);
 	write(STDOUT_FILENO, ": not found\n", 12);
+}
+/**
+ * free_list - free_list
+ * @head: head
+ */
+void free_list(directs *head)
+{
+	directs *p, *store;
+
+	p = head;
+
+	while (p != NULL)
+	{
+		store = p->next;
+		free(p->direct);
+		free(p);
+		p = store;
+	}
 }

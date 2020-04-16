@@ -10,14 +10,11 @@ char *_strcat(char *fstr, char *sstr)
 	char *concat = NULL;
 	int lens1 = 0, lens2 = 0, i = 0, j = 0;
 
-	while (fstr[i] != '\0')
-		lens1++, i++;
+	lens1 = _strlen(fstr);
 
-	i = 0;
-	while (sstr[i] != '\0')
-		lens2++, i++;
+	lens2 = _strlen(sstr);
 
-	concat = malloc(sizeof(char) * (lens1 + lens2));
+	concat = malloc((lens1 + lens2 + 1));
 
 	for (i = 0; i < lens1; i++)
 	{
@@ -63,6 +60,7 @@ char *_which(directs **head, char *dir)
 	struct stat st;
 	directs *dup = *head;
 	char *ruta = NULL;
+	char *rutaComp = NULL;
 
 	if (stat(dir, &st) == 0)
 	{
@@ -73,16 +71,17 @@ char *_which(directs **head, char *dir)
 		while (dup != NULL)
 		{
 			ruta = _strcat(dup->direct, "/");
-			ruta = _strcat(ruta, dir);
-			if (stat(ruta, &st) == 0)
+			rutaComp = _strcat(ruta, dir);
+			if (stat(rutaComp, &st) == 0)
 			{
-				return (ruta);
+				free(ruta);
+				return (rutaComp);
 			}
-
 			dup = dup->next;
+			free(ruta);
+			free(rutaComp);
 		}
 	}
-
 	return (dir);
 }
 
@@ -94,15 +93,13 @@ char *_which(directs **head, char *dir)
 char *_getenv(const char *name)
 {
 	char *dup = _strdup(name);
-	char *dupenv = NULL;
 	char *value = NULL;
 	char *token = NULL;
 
 	for (size_t i = 0; environ[i] != NULL; i++)
 	{
-		dupenv = _strdup(environ[i]);
-		token = strtok(dupenv, "=");
-		if (strcmp(dup, dupenv) == 0)
+		token = strtok(environ[i], "=");
+		if (strcmp(dup, environ[i]) == 0)
 		{
 			token = strtok(NULL, "=");
 			value = token;
@@ -110,6 +107,7 @@ char *_getenv(const char *name)
 		}
 	}
 
+	free(dup);
 	return (value);
 }
 

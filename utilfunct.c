@@ -14,11 +14,11 @@ char **sep_by_space(char *str)
 	while (token != NULL)
 		token = strtok(NULL, " "), len++;
 
-	av = malloc(sizeof(char *) * (len + 1));
+	av = malloc((len + 1));
 
 	put_args(av, str);
-
-
+	free(dupstr);
+	free(token);
 	return (av);
 }
 
@@ -51,15 +51,12 @@ char **put_args(char **av, char *str)
 
 	while (token != NULL)
 	{
-		av[i] = malloc(sizeof(char) * _strlen(token));
-		av[i] = token;
+		av[i] = malloc(_strlen(token));
+		av[i] = _strdup(token);
 		token = strtok(NULL, " ");
 		i++;
 	}
-
 	av[i] = NULL;
-
-
 	return (av);
 }
 /**
@@ -90,7 +87,7 @@ char **get_params(char **args)
 		if (*args[i] != '-')
 		{
 			params[wc] = malloc(sizeof(char) * _strlen(args[i]));
-			params[wc] = args[i];
+			params[wc] = _strdup(args[i]);
 			wc++;
 		}
 		i++;

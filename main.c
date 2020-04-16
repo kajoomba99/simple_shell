@@ -68,4 +68,5 @@ void exect_prompt(void)
 		if (!wait(&status))
 			perror("Error wait");
 	}
+	free(line);
 }
